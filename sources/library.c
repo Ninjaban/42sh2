@@ -4,7 +4,13 @@
 
 #include "error.h"
 #include "types.h"
+#include "internal.h"
 #include "library.h"
+
+t_internal_context			g_internal_context = {
+		.initialized = FALSE,
+		.debug_mode = FALSE
+};
 
 /*
 **	internal_context_is_initialize()
@@ -15,11 +21,11 @@
 **
 **	@return	TRUE in success, FALSE otherwise
 */
-extern t_bool		internal_context_is_initialize (void)
-{
-	return (internal_context.initialized);
-}
 
+extern t_bool		internal_context_is_initialize(void)
+{
+	return (g_internal_context.initialized);
+}
 
 /*
 **	internal_context_initialize()
@@ -28,10 +34,9 @@ extern t_bool		internal_context_is_initialize (void)
 **
 **	@error	none
 */
-extern void			internal_context_initialize (void)
+
+extern void			internal_context_initialize(void)
 {
-	internal_context.initialized = TRUE;
-
-	internal_context.debug_mode = DEBUG_MODE;
+	g_internal_context.initialized = TRUE;
+	g_internal_context.debug_mode = DEBUG_MODE;
 }
-

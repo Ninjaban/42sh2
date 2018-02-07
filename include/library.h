@@ -5,16 +5,19 @@
 #ifndef LIBRARY_H
 # define LIBRARY_H
 
-# include "internal.h"
-
-/* -- library_configuration */
-extern static struct
+/*
+** -- library_configuration
+*/
+typedef struct	s_internal_context
 {
-	t_bool	initialized;
+	t_bool		initialized;
 
-	t_bool	debug_mode;
+	t_bool		debug_mode;
 
-} internal_context;
+	t_term		term;
+}				t_internal_context;
+
+extern t_internal_context g_internal_context;
 
 /* -- Function */
 /*

@@ -12,7 +12,9 @@
 
 NAME		=   42sh
 
-SRC 		=   library.c
+SRC 		=   library.c \
+                ft_42sh_print_main.c \
+                ft_main.c
 
 DIRSRC  	=	sources/
 DIRINC		=	include/

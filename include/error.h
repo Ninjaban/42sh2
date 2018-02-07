@@ -21,7 +21,7 @@
 
 #define FT_DEBUG(in_context, ...)													\
 	do {																			\
-	if (internal_context.debug_mode == TRUE) {										\
+	if (g_internal_context.debug_mode == TRUE) {										\
 		(void) fprintf (stderr, "DEBUG:%s:%" PRIu64 ":%s: " in_context "\n",		\
 					__FILE__, (uint64_t)__LINE__, __func__,							\
 					__VA_ARGS__);													\
@@ -42,6 +42,6 @@
 					__VA_ARGS__);													\
 	} while (0)
 
-# define	DEBUG_MODE		FALSE
+# define	DEBUG_MODE		TRUE
 
 #endif

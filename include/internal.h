@@ -29,13 +29,28 @@
 # define ZONE_TREE		2
 # define ZONE_CMD		3
 
+/*
+**	Différentes tailles des zones de texte en pourcentage
+*/
+# define ZONE_HISTORY_X		20
+# define ZONE_HISTORY_Y		100
+# define ZONE_PRINT_X		60
+# define ZONE_PRINT_Y		80
+# define ZONE_TREE_X		20
+# define ZONE_TREE_Y		100
+# define ZONE_CMD_X			60
+# define ZONE_CMD_Y			20
+
+# define ZONE_MARGE			2
+# define WINDOW_MARGE		1
+
 
 /* -- Structure */
 typedef struct	s_text_zone
 {
 	/* -- core */
-	uint64_t	size_x;
-	uint64_t	size_y;
+	uint32_t	size_x;
+	uint32_t	size_y;
 	/* -- graph */
 	WINDOW		*window;
 }				t_text_zone;
@@ -45,5 +60,8 @@ typedef struct	s_term
 	t_text_zone	base;
 	t_text_zone	zone[NB_TEXT_ZONE];
 }				t_term;
+
+extern t_bool		ft_print_initialize(void);
+extern t_bool		ft_print_finalize(void);
 
 #endif
