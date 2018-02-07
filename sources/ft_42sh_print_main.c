@@ -28,8 +28,12 @@ static void			ft_print_initialize_window(int index, uint32_t posy, uint32_t posx
 static void			ft_print_resize(int sig)
 {
 	(void)sig;
-	getmaxyx(stdscr, g_internal_context.term.base.size_y, g_internal_context.term.base.size_x);
+	endwin();
 
+	refresh();
+	clear();
+
+	getmaxyx(stdscr, g_internal_context.term.base.size_y, g_internal_context.term.base.size_x);
 	ft_print_initialize_window_size(ZONE_HISTORY, ZONE_HISTORY_Y, ZONE_HISTORY_X);
 	g_internal_context.term.zone[ZONE_HISTORY].size_y -= (WINDOW_MARGE * 2);
 	g_internal_context.term.zone[ZONE_HISTORY].size_x -= (WINDOW_MARGE + ZONE_MARGE);
@@ -48,19 +52,28 @@ static void			ft_print_resize(int sig)
 	wclear(g_internal_context.term.base.window);
 	wclear(g_internal_context.term.zone[ZONE_HISTORY].window);
 	wclear(g_internal_context.term.zone[ZONE_PRINT].window);
+	/*
 	wclear(g_internal_context.term.zone[ZONE_TREE].window);
 	wclear(g_internal_context.term.zone[ZONE_CMD].window);
+	*/
 	wresize(g_internal_context.term.base.window, g_internal_context.term.base.size_y, g_internal_context.term.base.size_x);
 	wresize(g_internal_context.term.zone[ZONE_HISTORY].window, g_internal_context.term.zone[ZONE_HISTORY].size_y, g_internal_context.term.zone[ZONE_HISTORY].size_x);
+	mvwin(g_internal_context.term.zone[ZONE_PRINT].window, WINDOW_MARGE, g_internal_context.term.zone[ZONE_HISTORY].size_x + ZONE_MARGE + (WINDOW_MARGE * 2));
 	wresize(g_internal_context.term.zone[ZONE_PRINT].window, g_internal_context.term.zone[ZONE_PRINT].size_y, g_internal_context.term.zone[ZONE_PRINT].size_x);
+	/*
+	mvwin(g_internal_context.term.zone[ZONE_TREE].window, WINDOW_MARGE, g_internal_context.term.zone[ZONE_HISTORY].size_x + g_internal_context.term.zone[ZONE_PRINT].size_x + (ZONE_MARGE * 2) + (WINDOW_MARGE * 3));
 	wresize(g_internal_context.term.zone[ZONE_TREE].window, g_internal_context.term.zone[ZONE_TREE].size_y, g_internal_context.term.zone[ZONE_TREE].size_x);
+	mvwin(g_internal_context.term.zone[ZONE_CMD].window, g_internal_context.term.zone[ZONE_PRINT].size_y + ZONE_MARGE + (WINDOW_MARGE * 2), g_internal_context.term.zone[ZONE_HISTORY].size_x + ZONE_MARGE + (WINDOW_MARGE * 2));
 	wresize(g_internal_context.term.zone[ZONE_CMD].window, g_internal_context.term.zone[ZONE_CMD].size_y, g_internal_context.term.zone[ZONE_CMD].size_x);
+	*/
 
 	box(g_internal_context.term.base.window, 0, 0);
 	box(g_internal_context.term.zone[ZONE_HISTORY].window, 0, 0);
 	box(g_internal_context.term.zone[ZONE_PRINT].window, 0, 0);
+	/*
 	box(g_internal_context.term.zone[ZONE_TREE].window, 0, 0);
 	box(g_internal_context.term.zone[ZONE_CMD].window, 0, 0);
+	*/
 
 	wrefresh(g_internal_context.term.base.window);
 	touchwin(g_internal_context.term.base.window);
@@ -73,6 +86,7 @@ static void			ft_print_resize(int sig)
 	wrefresh(g_internal_context.term.zone[ZONE_CMD].window);
 
 	wmove(g_internal_context.term.zone[ZONE_CMD].window, 1, 1);
+
 	curs_set(1);
 }
 
@@ -97,6 +111,7 @@ extern t_bool		ft_print_initialize(void)
 	g_internal_context.term.zone[ZONE_PRINT].size_y -= (WINDOW_MARGE + ZONE_MARGE);
 	g_internal_context.term.zone[ZONE_PRINT].size_x -= (WINDOW_MARGE + ZONE_MARGE);
 	ft_print_initialize_window(ZONE_PRINT, WINDOW_MARGE, g_internal_context.term.zone[ZONE_HISTORY].size_x + ZONE_MARGE + (WINDOW_MARGE * 2));
+	/*
 	ft_print_initialize_window_size(ZONE_TREE, ZONE_TREE_Y, ZONE_TREE_X);
 	g_internal_context.term.zone[ZONE_TREE].size_y -= (WINDOW_MARGE * 2);
 	g_internal_context.term.zone[ZONE_TREE].size_x -= (WINDOW_MARGE * 2);
@@ -105,7 +120,7 @@ extern t_bool		ft_print_initialize(void)
 	g_internal_context.term.zone[ZONE_CMD].size_y -= (WINDOW_MARGE * 2);
 	g_internal_context.term.zone[ZONE_CMD].size_x -= (WINDOW_MARGE + ZONE_MARGE);
 	ft_print_initialize_window(ZONE_CMD, g_internal_context.term.zone[ZONE_PRINT].size_y + ZONE_MARGE + (WINDOW_MARGE * 2), g_internal_context.term.zone[ZONE_HISTORY].size_x + ZONE_MARGE + (WINDOW_MARGE * 2));
-
+*/
 	wrefresh(g_internal_context.term.base.window);
 
 	/* Term Param */
